@@ -40,7 +40,7 @@ public class login extends HttpServlet {
            
             conection db = new conection();
             db.login(uname, pass);
-                
+            response.sendRedirect("/bases_2_P1/prueba2.html");  
         }
     }
 
