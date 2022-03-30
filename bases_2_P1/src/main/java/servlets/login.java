@@ -37,10 +37,11 @@ public class login extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String uname = request.getParameter("usname");
             String pass = request.getParameter("pass");
-           
+            request.getSession().setAttribute("nombre", uname);
+            request.getSession().setAttribute("contraseña", pass);
             conection db = new conection();
             db.login(uname, pass);
-            response.sendRedirect("/bases_2_P1/prueba2.html");  
+            request.getRequestDispatcher("/preuba2.jsp").forward(request, response);
         }
     }
 
