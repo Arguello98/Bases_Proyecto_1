@@ -12,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import proyecto2.bases_2_p1.conection;
 
 /**
  *
@@ -33,27 +32,27 @@ public class login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            String uname = request.getParameter("usname");
-            String pass = request.getParameter("pass");
-            request.getSession().setAttribute("nombre", uname);
-            request.getSession().setAttribute("contraseña", pass);
-            conection db = new conection();
-            String options = db.datos();
-            request.getSession().setAttribute("options", options);
-            /*
-            if(request.getSession().getAttribute("Error") == null){
-                String error = db.datos(uname, pass);
-                request.getSession().setAttribute("Error", error);
-            }
-            else{
-                request.getSession().setAttribute("nombre", request.getParameter("selector"));
-            }*/
-            String error = db.insertar_Tipo(uname);
-            request.getSession().setAttribute("Error", error);
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
-        }
+//        try (PrintWriter out = response.getWriter()) {
+//            /* TODO output your page here. You may use following sample code. */
+//            String uname = request.getParameter("usname");
+//            String pass = request.getParameter("pass");
+//            request.getSession().setAttribute("nombre", uname);
+//            request.getSession().setAttribute("contraseña", pass);
+//            conection db = new conection();
+//            String options = db.datos();
+//            request.getSession().setAttribute("options", options);
+//            /*
+//            if(request.getSession().getAttribute("Error") == null){
+//                String error = db.datos(uname, pass);
+//                request.getSession().setAttribute("Error", error);
+//            }
+//            else{
+//                request.getSession().setAttribute("nombre", request.getParameter("selector"));
+//            }*/
+//            String error = db.insertar_Tipo(uname);
+//            request.getSession().setAttribute("Error", error);
+//            request.getRequestDispatcher("/index.jsp").forward(request, response);
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
