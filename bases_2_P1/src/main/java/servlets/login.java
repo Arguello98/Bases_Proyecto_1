@@ -40,8 +40,19 @@ public class login extends HttpServlet {
             request.getSession().setAttribute("nombre", uname);
             request.getSession().setAttribute("contraseña", pass);
             conection db = new conection();
-            db.login(uname, pass);
-            request.getRequestDispatcher("/preuba2.jsp").forward(request, response);
+            String options = db.datos();
+            request.getSession().setAttribute("options", options);
+            /*
+            if(request.getSession().getAttribute("Error") == null){
+                String error = db.datos(uname, pass);
+                request.getSession().setAttribute("Error", error);
+            }
+            else{
+                request.getSession().setAttribute("nombre", request.getParameter("selector"));
+            }*/
+            String error = db.insertar_Tipo(uname);
+            request.getSession().setAttribute("Error", error);
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
     }
 

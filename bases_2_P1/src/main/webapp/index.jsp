@@ -4,17 +4,28 @@
     <head>
         <title>Start Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="styles/css1.css" rel="stylesheet" type="text/css">
+        <!--<link href="styles/css1.css" rel="stylesheet" type="text/css">-->
     </head>
     <body>
         <h1>Hola mundo!!!!</h1>
+        <%
+            if(request.getSession().getAttribute("nombre") == null){
+                request.setAttribute("nombre", "Daniel");
+                request.getRequestDispatcher("/preuba2.jsp").forward(request, response);
+            }
+        %>
+        <h1></h1>
         <form action="login" method ="post">
+            <<h1>${Error}</h1>
+            <select id="isTitles" name = "selector">
+                   ${options}
+            </select>
             <pre>
-                <input type ="text" name="usname" placeholder=${nombre}/>
-                <input type ="text" name="pass" placeholder=${contraseña}/>
+                <input type ="text" name="usname" value=${nombre} >
+                <input type ="text" name="pass" value=${contraseña} >
                 <input type ="submit" name="submit"/>
             </pre>
         </form>
     </body>
-    <a href="prueba2.jsp"> link a prueba 2</a>
+    <a href="preuba2.jsp"> link a prueba 2</a>
 </html>
