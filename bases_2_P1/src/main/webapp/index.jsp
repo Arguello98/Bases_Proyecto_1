@@ -10,13 +10,15 @@
         <h1>Hola mundo!!!!</h1>
         <%
             if(request.getSession().getAttribute("nombre") == null){
-                request.setAttribute("nombre", "Daniel");
-                request.getRequestDispatcher("/preuba2.jsp").forward(request, response);
+                //request.setAttribute("nombre", "Daniel");
+                //request.getRequestDispatcher("/preuba2.jsp").forward(request, response);
             }
         %>
+        <button formaction="login" formmethod="post" formtype="submit">Click Me!</button>
+        
         <h1></h1>
         <form action="login" method ="post">
-            <<h1>${Error}</h1>
+            <h1>${Error}</h1>
             <select id="isTitles" name = "selector">
                    ${options}
             </select>
