@@ -72,9 +72,10 @@
                 <div class="card" style="width: 18rem;">
                     <i class="bi bi-journal-text icon"></i>
                     <div class="card-body">
-                        <button class="mx-auto button-login" >
-                            Mostrar ultimos movimientos 2
-                        </button>
+                        <form action="cambioPantalla" method="post">
+                            <input type="hidden" name="cambio" value="4">
+                            <input type="submit" value="administrar Proveedor">
+                        </form>
                     </div>
                 </div>
 
