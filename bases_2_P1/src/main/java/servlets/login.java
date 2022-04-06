@@ -5,13 +5,16 @@
  */
 package servlets;
 
+import clases.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import proyecto2.bases_2_p1.conection;
 
 /**
@@ -34,25 +37,59 @@ public class login extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            String uname = request.getParameter("usname");
-            String pass = request.getParameter("pass");
-            request.getSession().setAttribute("nombre", uname);
-            request.getSession().setAttribute("contraseña", pass);
-            conection db = new conection();
-            String options = db.datos();
-            request.getSession().setAttribute("options", options);
-            /*
-            if(request.getSession().getAttribute("Error") == null){
-                String error = db.datos(uname, pass);
-                request.getSession().setAttribute("Error", error);
+            String valor = request.getParameter("tipologin");
+            if(valor == null){
+                valor = "-1";
+            }
+            if(valor.equals("1")){
+                String uname = request.getParameter("username");
+                String pass = request.getParameter("password");
+                HttpSession session = request.getSession();
+                session.setAttribute("username", uname);
+                session.setAttribute("password", pass);
+                conection db = new conection();
+                User colaborador = db.Login_Colaborador(uname, pass);
+                if(colaborador != null){
+                    session.removeAttribute("username");
+                    session.removeAttribute("password");
+                    session.setAttribute("opcionesTipo", db.buscar_tipo());
+                    session.setAttribute("opcionesSucursal", db.buscar_Sucursal());
+                    session.setAttribute("opcionesProducto", db.buscar_Producto());
+                    session.setAttribute("opcionesProveedor", db.buscar_Proveedor());
+                    session.setAttribute("usuario", colaborador);
+                    session.setAttribute("usuarios",db.buscar_Colaborador());
+                    request.getRequestDispatcher("/dashboardAdmin.jsp").forward(request, response);
+                }
+                else{
+                    String error = "Usuario o contraseña incorrecto";
+                    request.setAttribute("Error", error);
+                    request.getRequestDispatcher("/loginadmin.jsp").forward(request, response);
+                }   
             }
             else{
-                request.getSession().setAttribute("nombre", request.getParameter("selector"));
-            }*/
-            String error = db.insertar_Tipo(uname);
-            request.getSession().setAttribute("Error", error);
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+                String uname = request.getParameter("username");
+                String pass = request.getParameter("password");
+                request.getSession().setAttribute("username", uname);
+                request.getSession().setAttribute("password", pass);
+                conection db = new conection();
+                User usuario = db.Login_Cliente(uname, pass);
+                if(usuario != null){
+                    request.getSession().removeAttribute("username");
+                    request.getSession().removeAttribute("password");
+                    request.setAttribute("opcionesTipo", db.buscar_tipo());
+                    request.setAttribute("opcionesSucursal", db.buscar_Sucursal());
+                    request.setAttribute("opcionesProducto", db.buscar_Producto());
+                    request.setAttribute("usuario", usuario);
+                    request.setAttribute("usuarios",db.buscar_Colaborador());
+                    request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
+                }
+                else{
+                    String error = "Usuario o contraseña incorrecto";
+                    request.setAttribute("Error", error);
+                    request.getRequestDispatcher("/login.jsp").forward(request, response);
+                }
+            }
+            
         }
     }
 

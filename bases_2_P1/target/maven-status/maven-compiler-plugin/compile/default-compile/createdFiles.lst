@@ -1,3 +1,8 @@
-clases\User.class
 servlets\login.class
+servlets\operacionesTipo.class
+servlets\Registro.class
 proyecto2\bases_2_p1\conection.class
+clases\User.class
+servlets\cambioPantalla.class
+servlets\operacionesProducto.class
+servlets\operacionesSucursal.class

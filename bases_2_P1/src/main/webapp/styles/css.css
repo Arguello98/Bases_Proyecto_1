@@ -1,0 +1,26 @@
+a{
+    text-decoration: none;
+    color: #000;
+}
+
+a:hover{
+    text-decoration: none;
+    color: #000;
+}
+
+.border-css {
+    border:  1px solid blue !important;
+}
+
+.rounded{
+    border-radius: 25px !important;
+}
+
+.button-login{
+
+    color: blue;
+    background: lightblue;
+    border:  1px solid blue !important;
+    border-radius: 5px !important;
+
+}
