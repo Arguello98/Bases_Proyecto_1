@@ -56,6 +56,7 @@ public class login extends HttpServlet {
                     session.setAttribute("opcionesSucursal", db.buscar_Sucursal());
                     session.setAttribute("opcionesProducto", db.buscar_Producto());
                     session.setAttribute("opcionesProveedor", db.buscar_Proveedor());
+                    session.setAttribute("opcionesColaborador", db.buscar_Colaborador_id());
                     session.setAttribute("usuario", colaborador);
                     session.setAttribute("usuarios",db.buscar_Colaborador());
                     request.getRequestDispatcher("/dashboardAdmin.jsp").forward(request, response);
@@ -69,18 +70,18 @@ public class login extends HttpServlet {
             else{
                 String uname = request.getParameter("username");
                 String pass = request.getParameter("password");
-                request.getSession().setAttribute("username", uname);
-                request.getSession().setAttribute("password", pass);
+                HttpSession session = request.getSession();
+                session.setAttribute("username", uname);
+                session.setAttribute("password", pass);
                 conection db = new conection();
                 User usuario = db.Login_Cliente(uname, pass);
                 if(usuario != null){
-                    request.getSession().removeAttribute("username");
-                    request.getSession().removeAttribute("password");
-                    request.setAttribute("opcionesTipo", db.buscar_tipo());
-                    request.setAttribute("opcionesSucursal", db.buscar_Sucursal());
-                    request.setAttribute("opcionesProducto", db.buscar_Producto());
-                    request.setAttribute("usuario", usuario);
-                    request.setAttribute("usuarios",db.buscar_Colaborador());
+                    session.removeAttribute("username");
+                    session.removeAttribute("password");
+                    session.setAttribute("opcionesTipo", db.buscar_tipo());
+                    session.setAttribute("opcionesSucursal", db.buscar_Sucursal());
+                    session.setAttribute("opcionesProducto", db.buscar_Producto());
+                    session.setAttribute("usuario", usuario);
                     request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
                 }
                 else{

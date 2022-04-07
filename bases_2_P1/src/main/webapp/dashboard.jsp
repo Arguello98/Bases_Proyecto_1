@@ -27,20 +27,44 @@
 </head>
 <body>
     <div class="container mt-4">
-        <div class="row">
+        <div class="row mt-2">
             <div class="col-6 mx-auto text-center">
                 <img src="./imgs/logo.jpg" alt="logo" srcset="./imgs/logo.jpg" height="150" width="200" />
-                <select name="opcionesT" >
-                    ${opcionesTipo}
-                </select>
-                <select name="opcionesT" >
-                    ${opcionesSucursal}
-                </select>
-                <select name="opcionesT" >
-                    ${opcionesProducto}
-                </select>
             </div>
         </div>
+        <div class="row mt-2">
+                <div class="col-4 mx-auto text-center">
+            <div class="card" style="width: 18rem;">
+                <i class="bi bi-signpost-2-fill icon"></i>
+                <div class="card-body">
+                    <form action="cambioPantallaUsuario" method="post">
+                        <input type="hidden" name="cambio" value="1">
+                        <input type="submit" value="Comprar">
+                    </form>
+                </div>
+            </div>
+         </div>
+        <div class="col-4 mx-auto text-center">
+            <div class="card" style="width: 18rem;">
+                <i class="bi bi-signpost-2-fill icon"></i>
+                <div class="card-body">
+                    <button class="mx-auto button-login" >
+                        modificar mis datos
+                    </button>
+                </div>
+            </div>
+         </div>
+        <div class="col-4 mx-auto text-center">
+            <div class="card" style="width: 18rem;">
+                <i class="bi bi-signpost-2-fill icon"></i>
+                <div class="card-body">
+                    <button class="mx-auto button-login" >
+                        Consultar ultimos movimientos​
+                    </button>
+                </div>
+            </div>
+         </div>
+        </div>     
     </div>
 </body>
 </html>

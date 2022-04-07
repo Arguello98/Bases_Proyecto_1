@@ -1,9 +1,13 @@
 servlets\login.class
 servlets\operacionesTipo.class
 servlets\Registro.class
+servlets\cambioPantalla.class
+clases\ProductoCompra.class
 proyecto2\bases_2_p1\conection.class
 clases\User.class
 servlets\operacionesProveedor.class
-servlets\cambioPantalla.class
 servlets\operacionesProducto.class
 servlets\operacionesSucursal.class
+servlets\cambioPantallaUsuario.class
+servlets\colaborador.class
+servlets\operacionesCompra.class

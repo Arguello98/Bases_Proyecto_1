@@ -5,6 +5,7 @@
  */
 package proyecto2.bases_2_p1;
 
+import clases.ProductoCompra;
 import clases.User;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -14,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import oracle.jdbc.*;
@@ -37,17 +39,6 @@ public class conection {
         
     }
     
-    public void login(String uname, String pass){
-        
-        try {
-            CallableStatement stnt = con.prepareCall("{call prueba_insersion(?,?)}");
-            stnt.setString(1, uname);
-            stnt.setString(2, pass);
-            stnt.execute();
-        } catch (SQLException ex) {
-            Logger.getLogger(conection.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     //Tipo
     
     public String insertar_Tipo(String nombre){
@@ -310,6 +301,23 @@ public class conection {
         }
         return datoss;
     }
+     public String buscar_Nombre_Producto(int id_Producto){
+        
+        String datoss = "";
+        try {
+            CallableStatement stnt = con.prepareCall("{ ? = call Producto_Package.Buscar_id(?)}");
+            stnt.registerOutParameter(1,OracleTypes.CURSOR);
+            stnt.setInt(2,id_Producto);
+            stnt.execute();
+            ResultSet resultado = (ResultSet) stnt.getObject(1);
+            while(resultado.next()){
+                datoss += resultado.getString("nombre");
+             }
+        } catch (SQLException ex) {
+            Logger.getLogger(conection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return datoss;
+    }
      public void buscar_Producto_modificar_Precio(int id_sucursal,String [] arguments){
         
         try {
@@ -504,7 +512,18 @@ public class conection {
             stnt.registerOutParameter(1,OracleTypes.CURSOR);
             stnt.execute();
             ResultSet resultado = (ResultSet) stnt.getObject(1);
-            datoss += "<table>";
+            datoss += "<table class="+"table"+">";
+            datoss += "<tr>"+"<td>"+ "Id"+ "</td>" +
+                        "<td>"+ "Id Tipo"+ "</td>" +
+                        "<td>"+ "Id Sucursal"+ "</td>" +
+                        "<td>"+ "Nombre"+ "</td>" +
+                        "<td>"+ "Apellido"+ "</td>" +
+                        "<td>"+ "Segundo apellido"+ "</td>" +
+                        "<td>"+ "Direccion"+ "</td>" +
+                        "<td>"+ "Fecha de nacimiento"+ "</td>" +
+                        "<td>"+ "Telefono"+ "</td>" +
+                        "<td>"+ "Correo"+ "</td>" +
+                        "<td>"+ "Contraseña"+ "</td>" +"</tr>";
             while(resultado.next()){
                 datoss += "<tr>" +
                         "<td>"+ resultado.getString(1)+ "</td>" +
@@ -526,7 +545,26 @@ public class conection {
         }
         return datoss;
     }
-    
+    public String buscar_Colaborador_id(){
+        
+        String datoss = "";
+        try {
+            CallableStatement stnt = con.prepareCall("{ ? = call Colaborador_Package.Buscar}");
+            stnt.registerOutParameter(1,OracleTypes.CURSOR);
+            stnt.execute();
+            ResultSet resultado = (ResultSet) stnt.getObject(1);
+            while(resultado.next()){
+                datoss += "<option value=" 
+                        +resultado.getString(1)+
+                        ">"+
+                       resultado.getString(1)
+                        +"</option>";
+             }
+        } catch (SQLException ex) {
+            Logger.getLogger(conection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return datoss;
+    }
     public String buscar_Colaborador_por_Sucursal(int id_Sucursal){
         
         String datoss = "";
@@ -806,16 +844,20 @@ public class conection {
         return colaborador;
     }
     //factura
-    public void insertar_Factura(int id_Sucursal ,int id_Cliente, Date fecha_compra){
+       public int insertar_Factura(int id_Sucursal ,int id_Cliente, Date fecha_compra){
+           int id= -1;
         try {
-            CallableStatement stnt = con.prepareCall("{call Factura_Package.crear_Factura(?,?,?)}");
+            CallableStatement stnt = con.prepareCall("{call Factura_Package.crear_Factura(?,?,?,?)}");
             stnt.setInt(1, id_Sucursal);
             stnt.setInt(2, id_Cliente);
             stnt.setDate(3, fecha_compra);
+            stnt.registerOutParameter(4, OracleTypes.INTEGER);
             stnt.execute();
+            id = stnt.getInt(4);
         } catch (SQLException ex) {
             Logger.getLogger(conection.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return id;
     }
     
     public void borrar_Factura(int id_factura){
@@ -1126,6 +1168,46 @@ public class conection {
         }
         return datoss;
     }
+     //bitacora
+      public String buscar_Bitacora(){
+        
+        String datoss = "";
+        try {
+            CallableStatement stnt = con.prepareCall("{ ? = call Bitacora_Package.Buscar}");
+            stnt.registerOutParameter(1,OracleTypes.CURSOR);
+            stnt.execute();
+            ResultSet resultado = (ResultSet) stnt.getObject(1);
+            datoss += "<table class="+"table"+">";
+            datoss += "<tr>"+"<td>"+ "Id"+ "</td>" +
+                        "<td>"+ "Nombre Producto"+ "</td>" +
+                        "<td>"+ "Valor Anterior"+ "</td>" +
+                        "<td>"+ "Valor Nuevo"+ "</td>" +
+                        "<td>"+ "ID Colaborador"+ "</td>" +
+                        "<td>"+ "Fecha de Modificacion"+ "</td>" +
+                        "</tr>";
+            while(resultado.next()){
+                datoss += "<tr>" +
+                        "<td>"+ resultado.getString(1)+ "</td>" +
+                        "<td>"+ resultado.getString(2)+ "</td>" +
+                        "<td>"+ resultado.getString(3)+ "</td>" +
+                        "<td>"+ resultado.getString(4)+ "</td>" +
+                        "<td>"+ resultado.getString(5)+ "</td>" +
+                        "<td>"+ resultado.getString(6)+ "</td>" +
+                        "</tr>";
+             }
+            datoss += "</table>";
+        } catch (SQLException ex) {
+            Logger.getLogger(conection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return datoss;
+      }
+     public void comprar(ArrayList<ProductoCompra> productos,int id_Sucursal, int id_Cliente, Date fechaCompra){
+         int id_Factura = this.insertar_Factura(id_Sucursal, id_Cliente, fechaCompra);
+         for (int i = 0; i < productos.size(); i++) {
+             this.comprar_Producto(productos.get(i).getId_Producto(), productos.get(i).getCantidad());
+             this.insertar_Detalle(id_Factura,productos.get(i).getId_Producto(), productos.get(i).getCantidad());
+         }
+     }
     public Connection getConnection(){
         return this.con;
     }

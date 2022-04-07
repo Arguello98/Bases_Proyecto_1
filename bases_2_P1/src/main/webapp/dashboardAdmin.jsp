@@ -29,7 +29,7 @@
 <body>
     <h1 class="mx-auto text-center">PANEL ADMINISTRADOR</h1>
     <div class="container">
-        
+
         <div class="row mt-2">
             <div class="col-4 mx-auto text-center">
                 <div class="card" style="width: 18rem;">
@@ -84,9 +84,10 @@
                 <div class="card" style="width: 18rem;">
                     <i class="bi bi-signpost-2-fill icon"></i>
                     <div class="card-body">
-                        <button class="mx-auto button-login" >
-                            Administar Proveedor​
-                        </button>
+                       <form action="cambioPantalla" method="post">
+                            <input type="hidden" name="cambio" value="5">
+                            <input type="submit" value="administrar Colaborador">
+                        </form>
                     </div>
                 </div>
             </div>
@@ -94,15 +95,16 @@
                 <div class="card" style="width: 18rem;">
                     <i class="bi bi-card-checklist icon"></i>
                     <div class="card-body">
-                        <button class="mx-auto button-login" >
-                            Mostrar bitacora
-                        </button>
+                        <form action="cambioPantalla" method="post">
+                            <input type="hidden" name="cambio" value="6">
+                            <input type="submit" value="Mostrar Bitacora">
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        
-                <div class="row mt-2">
+
+        <div class="row mt-2">
             <div class="col-4 mx-auto text-center">
                 <div class="card" style="width: 18rem;">
                     <i class="bi bi-wallet-fill icon"></i>
@@ -112,7 +114,6 @@
                         </button>
                     </div>
                 </div>
-
             </div>
             <div class="col-4 mx-auto text-center">
                 <div class="card" style="width: 18rem;">
@@ -135,6 +136,7 @@
                 </div>
             </div>
         </div>
+        
 
     </div>
 

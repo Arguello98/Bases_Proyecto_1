@@ -14,6 +14,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import proyecto2.bases_2_p1.conection;
 
 /**
  *
@@ -51,6 +52,16 @@ public class cambioPantalla extends HttpServlet {
             }
             if(a.equals("4")){
                 request.getRequestDispatcher("/AdministrarProveedor.jsp").forward(request, response); 
+            }
+            if(a.equals("5")){
+                conection db = new conection();
+                request.getSession().setAttribute("tablaColaboradores",db.buscar_Colaborador());
+                request.getRequestDispatcher("/AdministrarColaborador.jsp").forward(request, response); 
+            }
+            if(a.equals("6")){
+                conection db = new conection();
+                request.getSession().setAttribute("tablaBitacora",db.buscar_Bitacora());
+                request.getRequestDispatcher("/Administrarbitacora.jsp").forward(request, response); 
             }
         }
     }
