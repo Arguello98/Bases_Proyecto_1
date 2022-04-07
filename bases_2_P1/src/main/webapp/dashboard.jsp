@@ -40,22 +40,37 @@
                     ${opcionesProducto}
                 </select>
             </div>
+        </div>        
+    <div class="col-4 mx-auto text-center">
+        <div class="card" style="width: 18rem;">
+            <i class="bi bi-signpost-2-fill icon"></i>
+            <div class="card-body">
+                <button class="mx-auto button-login" >
+                    Comprar​
+                </button>
+            </div>
         </div>
-        <div class="row">
-        <div class="col-md-2 offset-md-8">
-          <button><a href="./login.jsp">Consultar  ultimos movimientos​</a></button>
-        </div>
-      </div>
-      <div class="col-4 mx-auto text-center">
-                <div class="card" style="width: 18rem;">
-                    <i class="bi bi-signpost-2-fill icon"></i>
-                    <div class="card-body">
-                        <button class="mx-auto button-login" >
-                            Consultar ultimos movimientos​
-                        </button>
-                    </div>
-                </div>
      </div>
+    <div class="col-4 mx-auto text-center">
+        <div class="card" style="width: 18rem;">
+            <i class="bi bi-signpost-2-fill icon"></i>
+            <div class="card-body">
+                <button class="mx-auto button-login" >
+                    modificar mis datos
+                </button>
+            </div>
+        </div>
+     </div>
+    <div class="col-4 mx-auto text-center">
+        <div class="card" style="width: 18rem;">
+            <i class="bi bi-signpost-2-fill icon"></i>
+            <div class="card-body">
+                <button class="mx-auto button-login" >
+                    Consultar ultimos movimientos​
+                </button>
+            </div>
+        </div>
+     </div>            
     </div>
 </body>
 </html>
