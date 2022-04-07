@@ -7,3 +7,4 @@ servlets\operacionesProveedor.class
 servlets\cambioPantalla.class
 servlets\operacionesProducto.class
 servlets\operacionesSucursal.class
+servlets\colaborador.class

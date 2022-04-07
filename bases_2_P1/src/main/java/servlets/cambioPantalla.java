@@ -52,6 +52,9 @@ public class cambioPantalla extends HttpServlet {
             if(a.equals("4")){
                 request.getRequestDispatcher("/AdministrarProveedor.jsp").forward(request, response); 
             }
+            if(a.equals("5")){
+                request.getRequestDispatcher("/AdministrarColaborador.jsp").forward(request, response); 
+            }
         }
     }
 
